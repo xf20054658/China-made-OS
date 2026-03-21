@@ -1,6 +1,7 @@
 services:
   openclaw:
     image: rockylinux-openclaw:9
+    build: .
     container_name: openclaw-service
     command: ["openclaw", "gateway", "--bind", "auto"]
     
