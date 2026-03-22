@@ -1,3 +1,4 @@
 # .gitignore
 # 排除环境变量文件
 **/.env          # 过滤纯.env文件
+UOS-openclaw/node22-bin/
