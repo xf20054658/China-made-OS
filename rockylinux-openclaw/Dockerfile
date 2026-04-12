@@ -13,7 +13,7 @@ RUN sed -e 's|^mirrorlist=|#mirrorlist=|g' \
     -i.bak /etc/yum.repos.d/rocky*.repo
 
 # 2. 安装必要依赖（curl、wget、gcc 等，gcc 用于后续可能的 npm 编译）
-RUN dnf install -y --allowerasing curl wget gcc-c++ make sudo git && \
+RUN dnf install -y --allowerasing curl wget gcc-c++ make cmake sudo git && \
     dnf clean all && \
     rm -rf /var/cache/dnf
 
@@ -31,7 +31,7 @@ RUN node -v && npm -v
 # 6. 全局安装 OpenClaw
 # 注意：全局安装需要 root 权限，且建议配置 npm 国内镜像加速构建
 RUN npm config set registry https://registry.npmmirror.com && \
-    npm install -g openclaw@latest
+    npm install -g openclaw@2026.2.19-2 --force
 
 
 # 7. 创建 node 用户并准备工作空间
@@ -41,6 +41,9 @@ RUN mkdir -p /home/node
 WORKDIR /home/node
 RUN chown -R node:node /home/node
 
+
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 8. 设置工作目录（按要求指定为 /home/node）
 WORKDIR /home/node

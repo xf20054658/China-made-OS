@@ -1,3 +1,6 @@
+# 导出 image
+docker save -o rockylinux-openclaw-v2.0.0.tar rockylinux-openclaw:v2.0.0
+
 - 运行容器，使用挂载目录：~/.openclaw-rockylinux
 docker run -it --rm -p 18789:18789 -p 18790:18790 -v ~/.openclaw-rockylinux:/home/node rockylinux-openclaw:9
 
